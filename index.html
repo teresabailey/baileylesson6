@@ -1,0 +1,117 @@
+<!DOCTYPE html>  
+<html>  <!-- Shirmung, I made notes throughout to show I understand how these all work... -->
+  <head>
+    <style>  /*this allows you to put css styles in the header in the html file itself*/
+      h1 {    /*this uses a class h1 that browsers will recognize (though the programmer has redefined its look), so it doesn't need a period before it*/
+        height: 200px; /*this makes the h1 box tall*/
+        background-color: yellowgreen; /*this uses defined browser colors so you don't need a hex code or a #sign*/
+      }
+
+      .subtitle {     /*this is a made up class called subtitle that was defined completely by the programmer, so it needs a period before it*/
+        width: 100%;
+        background-color: lightpink;
+      }
+
+      .box-1 {
+        float: left;  /*these four floats in each box are what position them side by side*/
+        width: 200px; /*the width and height can be specified in px or you could also do percentages.*/
+        height: 200px;
+        color: white;
+        background-color: teal;
+      }  /*this ending bracket is properly lined up with the class it goes with above. the styling for that class is indented.*/
+
+      .box-2 {
+        float: left;
+        width: 200px;
+        height: 200px;
+        color: white;
+        background-color: red;
+      }
+
+      .box-3 {
+        float: left;
+        width: 200px;
+        height: 200px;
+        color: white;
+        background-color: lightblue;
+      }
+
+      .box-4 {
+        float: left;
+        width: 200px;
+        height: 200px;
+        color: white;
+        background-color: lightgreen;
+      }
+    </style> <!-- this is the end of the css styling -->
+  </head>
+
+  <body>
+    <h1>Title</h1>
+    <h2 class="subtitle">Subtitle</h2> <!-- having this class of subtitle would let the programmer, for example, style the h2s throughout the site a certain one, but also style this particular phase with the subtitle class as well. -->
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<p>
+
+    <div class="box-1">Box 1</div>
+
+    <div class="box-2">Box 2</div>
+
+    <div class="box-3">Box 3 (click me)</div>
+
+    <div class="box-4">Box 4</div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> <!-- this code helps the file know you are using js. it's readily available in several places online, and this version came from Google. -->
+
+    <script>   //this script runs the animations that happen throughout the page. document ready tells it to kick in at a certain time so it triggers when you want it to. the dollar signs mean you are using JQUERY, which is a library of JS code made into predefined shortcuts that you can use to simplify the amount and complexity of code you write.
+      $(document).ready(function() {
+        $("h1").animate({
+          width: 100,
+          opacity: 0.3 //this affects the opacity of the item
+        }, 1000); //this affects the amount of time it takes for the animation to happen. 1000 is one second.
+
+        $(".subtitle").animate({
+          width: "50%",
+          opacity: 0.5
+        }, 3000);
+
+        $("p").hide(3000, function() {  //this function has two parts that allow it to hide and show alternately, 3 seconds each
+          $("p").show(3000);
+        });
+
+        $(".box-1").fadeOut(1000, function() {  //this function has two parts that allow it to fade out and in alternately, 1 second each
+          $(".box-1").fadeIn(1000);
+        });
+
+        $(".box-2").animate({
+          opacity: 0.5
+        }, 2000);
+
+        $(".box-3").click(function() {  //this function shows an alert with Hello World! if you click on the words in box 3.
+          alert("Hello World!");
+        });
+
+        $(".box-4").slideUp(1000, function() {  //this function will only cycle through up/down/up/down, 1 second each. then it stops.
+          // callback function, runs after box-4 slides up
+          $(".box-4").slideDown(1000, function () {
+            // callback function, runs after box-4 slides down
+            $(".box-4").slideUp(1000, function() {
+              // callback function, runs after box-4 slides up
+              $(".box-4").slideDown(1000);
+            });
+          });
+        });
+
+        //another way to do lines 93-102, except will run forever, why? because the up and down keep triggering each other, over and over!
+        // var slideDown = function() {
+        //   $(".box-4").slideDown(1000, slideUp);
+        // };
+
+        // var slideUp = function() {
+        //   $(".box-4").slideUp(1000, slideDown);
+        // };
+
+        // slideUp();
+      });
+    </script>
+  </body>
+</html>
